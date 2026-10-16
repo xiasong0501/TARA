@@ -94,17 +94,19 @@ function renderResults() {
 }
 
 function renderGeneralization() {
-  const table = element("table", "generalization-table");
-  table.innerHTML = '<caption class="sr-only">Content and trajectory generalization: Top-1 ASR (%)</caption><thead><tr><th rowspan="2" scope="col">Method</th><th colspan="2" scope="colgroup">Seen content</th><th colspan="2" scope="colgroup">Unseen content</th></tr><tr><th scope="col">Seen traj.</th><th scope="col">Unseen traj.</th><th scope="col">Seen traj.</th><th scope="col">Unseen traj.</th></tr></thead>';
-  const body = element("tbody");
-  [["EOT", 3], ["TARA", 2]].forEach(([name, index]) => {
-    const row = element("tr", name === "TARA" ? "ours-row" : "");
-    const heading = element("th", "", name); heading.scope = "row"; row.append(heading);
-    GENERALIZATION.forEach(condition => row.append(element("td", name === "TARA" ? "best" : "", condition[index].toFixed(1))));
-    body.append(row);
+  const cards = GENERALIZATION.map(([content, trajectory, ours, eot]) => {
+    const card = element("article", "generalization-cell");
+    const heading = element("h4"); heading.append(content, element("br"), trajectory); card.append(heading);
+    [["TARA", ours, "ours"], ["EOT", eot, "baseline"]].forEach(([name, value, className]) => {
+      const row = element("div", `mini-bar ${className}`);
+      row.setAttribute("aria-label", `${name}: ${value.toFixed(1)}% Top-1 ASR`);
+      const track = element("span", "bar-track");
+      const bar = element("span", "bar"); bar.style.width = `${value / 50 * 100}%`;
+      track.append(bar); row.append(track, element("strong", "", `${value.toFixed(1)}%`)); card.append(row);
+    });
+    return card;
   });
-  table.append(body);
-  document.querySelector("#generalization-grid").replaceChildren(table);
+  document.querySelector("#generalization-grid").replaceChildren(...cards);
 }
 
 function renderGallery() {
@@ -126,7 +128,7 @@ function renderGallery() {
     const meta = element("div", "video-meta");
     const link = element("a", "", "View all 32 frames"); link.href = row.montage; link.target = "_blank"; link.rel = "noopener";
     meta.append(link);
-    body.append(element("h4", "", row.label), meta);
+    body.append(element("h3", "", row.label), meta);
     card.append(video, body); return card;
   });
   grid.replaceChildren(...cards);

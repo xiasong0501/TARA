@@ -28,13 +28,17 @@ def main():
         assert page.goto(args.url, wait_until="networkidle").status == 200
         assert page.locator("h1").count() == 1
         order = page.locator("main > section").evaluate_all("nodes => nodes.map(node => node.id)")
-        assert order == ["top", "overview", "method", "benchmark", "experiments", "conclusion", "citation"], order
+        assert order == ["top", "overview", "method", "videos", "physical", "results", "benchmark", "citation"], order
         assert page.locator("#overview .teaser").count() == 1
         assert page.locator(".teaser").count() == 1
-        assert page.locator("#experiments #physical #videos").count() == 1
-        assert page.locator("#overview .research-objective").inner_text().startswith("TARA learns a single adversarial texture")
+        assert page.locator("#overview .research-objective").inner_text().startswith("Research objective. TARA learns a single adversarial texture")
+        assert page.locator("#overview .motivation").evaluate("el => getComputedStyle(el).fontSize") == page.locator("#overview .research-objective").evaluate("el => getComputedStyle(el).fontSize")
+        assert page.locator("#overview .motivation").evaluate("el => el.compareDocumentPosition(document.querySelector('.research-objective')) & Node.DOCUMENT_POSITION_FOLLOWING")
+        assert page.locator(".headline-results .stat-value").all_inner_texts() == ["32.1%", "28.2%", "41.1%", "26.0%"]
+        assert page.locator(".method-steps article").count() == 3
+        assert page.locator(".publication-status").count() == 0
         assert page.locator("[data-group='practical_anticipation']").get_attribute("aria-selected") == "true"
-        assert page.locator(".code-placeholder").is_disabled()
+        assert page.locator(".code-link").get_attribute("href") == "https://github.com/xiasong0501/TARA"
         assert "note =" not in page.locator("#bibtex").inner_text()
         assert page.locator("#physical-results tbody tr:not(.protocol-row)").count() == 8
         assert page.locator("#physical-results .ours-row").last.inner_text().split() == ["Printed", "TARA", "32.1", "—", "28.2", "—"]
@@ -54,7 +58,8 @@ def main():
         page.locator("[data-result='generation']").click()
         assert page.locator("#generation-figure").is_visible()
         assert page.locator("#result-table .ours-row td").last.inner_text() == "67.37"
-        assert page.locator(".generalization-table .ours-row td").all_inner_texts() == ["40.5", "31.5", "43.2", "28.8"]
+        assert page.locator(".generalization-cell .mini-bar.ours strong").all_inner_texts() == ["40.5%", "31.5%", "43.2%", "28.8%"]
+        assert page.locator(".generalization-cell .mini-bar.baseline strong").all_inner_texts() == ["32.4%", "24.3%", "32.4%", "16.2%"]
         page.locator("[data-result='anticipation']").click()
         page.locator("[data-split='val']").click()
         page.locator("[data-group='practical_anticipation']").click()

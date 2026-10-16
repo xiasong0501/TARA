@@ -26,8 +26,10 @@
       <div class="nav-links">
         <a href="#overview">Overview</a>
         <a href="#method">Method</a>
+        <a href="#videos">Videos</a>
+        <a href="#physical">Physical</a>
+        <a href="#results">Results</a>
         <a href="#benchmark">Benchmark</a>
-        <a href="#experiments">Experiments</a>
         <a href="#citation">Citation</a>
       </div>
     </nav>
@@ -38,50 +40,39 @@
       <h1>Across Viewpoints and Time:<br><span>Trajectory-Generalizable Physical Attacks on<br class="desktop-break"> World Models and Video Understanding Models</span></h1>
       <p class="authors">Song Xia<sup>1</sup>, Meiewen Ding<sup>1</sup>, Chenqi Kong<sup>2</sup>, Wenhan Yang<sup>3</sup>, Xudong Jiang<sup>1</sup></p>
       <p class="affiliations"><span><sup>1</sup> Nanyang Technological University</span><span><sup>2</sup> National University of Singapore</span><span><sup>3</sup> Pengcheng Lab</span></p>
-      <p class="publication-status">Under review</p>
       <div class="hero-actions">
         <a class="button primary" href="assets/paper/tara-paper.pdf" target="_blank" rel="noopener">Paper</a>
-        <button class="button code-placeholder" disabled>Code <span>(to be updated)</span></button>
+        <a class="button secondary code-link" href="https://github.com/xiasong0501/TARA" target="_blank" rel="noopener">Code</a>
         <a class="button secondary" href="#videos">Videos</a>
       </div>
     </section>
 
-    <section class="section-shell overview-section" id="overview">
-      <h2>Research objective</h2>
-      <p class="research-objective"><strong>TARA</strong> learns a single adversarial texture that stays attached to an object and remains effective across different videos, viewpoints, and observation trajectories.</p>
-      <figure class="paper-figure teaser"><a href="assets/images/teaser.webp" target="_blank" rel="noopener"><img src="assets/images/teaser.webp" width="1779" height="588" fetchpriority="high" alt="A single surface-attached adversarial texture under changing viewpoints, scale, perspective, and occlusion across video trajectories."></a><figcaption>A fixed texture on a moving surface produces different projections and visibility patterns over time.</figcaption></figure>
-      <p><strong>Motivation.</strong> In physical deployment, a patch moves with its supporting surface rather than staying fixed on screen. Changes in viewpoint, scale, and occlusion must therefore be handled throughout a video, not just in a single image.</p>
+    <section class="section-shell overview-section" id="overview" aria-label="Research motivation and objective">
+      <p class="overview-copy motivation"><strong>Motivation.</strong> In physical deployment, a patch moves with its supporting surface rather than staying fixed on screen. Changes in viewpoint, scale, and occlusion must therefore be handled throughout a video, not just in a single image.</p>
+      <p class="overview-copy research-objective"><strong>Research objective.</strong> <strong>TARA</strong> learns a single adversarial texture that stays attached to an object and remains effective across different videos, viewpoints, and observation trajectories.</p>
+      <figure class="paper-figure framed-figure teaser"><a href="assets/images/teaser.webp" target="_blank" rel="noopener"><img src="assets/images/teaser.webp" width="1779" height="588" fetchpriority="high" alt="A single surface-attached adversarial texture under changing viewpoints, scale, perspective, and occlusion across video trajectories."></a><figcaption>A single surface-attached texture, observed across changing object–camera trajectories.</figcaption></figure>
+      <div class="headline-results" aria-label="Selected TARA Top-1 attack success rates">
+        <div><span class="stat-context">Physical · anticipation</span><strong class="stat-value">32.1<span>%</span></strong><span class="stat-label">Print-and-recapture ASR · V-JEPA2-L</span></div>
+        <div><span class="stat-context">Physical · recognition</span><strong class="stat-value">28.2<span>%</span></strong><span class="stat-label">Print-and-recapture ASR · V-JEPA2-L</span></div>
+        <div><span class="stat-context">EK100 · anticipation</span><strong class="stat-value">41.1<span>%</span></strong><span class="stat-label">Average validation Top-1 ASR</span></div>
+        <div><span class="stat-context">SSV2 · recognition</span><strong class="stat-value">26.0<span>%</span></strong><span class="stat-label">Average validation Top-1 ASR</span></div>
+      </div>
     </section>
 
-    <section class="section-shell content-section" id="method">
-      <h2>Method</h2>
-      <p>One shared texture must work across videos with different content and surface-observation trajectories. Their task gradients can conflict, making direct universal optimization difficult.</p>
-      <p>TARA uses frame-wise homographies and visibility masks to render the texture along each trajectory, then optimizes it in two stages:</p>
-      <ol class="method-stages">
-        <li><strong>Contrastive alignment.</strong> Bring attacked representations from different video–trajectory instances closer together while separating them from their own clean representations.</li>
-        <li><strong>Task refinement.</strong> Starting from the aligned texture, optimize prediction errors with visibility-aware weights. For future frame generation, refine against reconstruction error.</li>
-      </ol>
-      <figure class="paper-figure framework"><a href="assets/images/framework.webp" target="_blank" rel="noopener"><img src="assets/images/framework.webp" width="1783" height="362" loading="lazy" alt="TARA pipeline: shared texture initialization, trajectory-aware contrastive alignment, and task refinement."></a><figcaption>Trajectory-aware contrastive alignment followed by task refinement.</figcaption></figure>
+    <section class="method-section" id="method">
+      <div class="section-shell content-section">
+        <div class="section-heading"><h2 class="feature-title">Align first. Refine for the task.</h2><p>Heterogeneous videos and trajectories produce conflicting texture gradients. TARA builds a more compatible starting point for shared optimization.</p></div>
+        <div class="method-steps">
+          <article><span class="step-number" aria-hidden="true">01</span><h3>Render along a trajectory</h3><p>Attach one canonical texture to a surface. Frame-wise homographies and visibility masks account for motion, perspective, and occlusion.</p><div class="equation">γ<sub>i</sub> = {(H<sub>it</sub>, M<sub>it</sub>)}<sub>t=1</sub><sup>T</sup></div></article>
+          <article><span class="step-number" aria-hidden="true">02</span><h3>Align attacked representations</h3><p>Bring attacked features from different video–trajectory instances toward a shared region, while separating them from their own clean features.</p><div class="equation">L<sub>con</sub> = mean<sub>i≠j</sub> softplus[(s(z<sub>i</sub><sup>a</sup>, z<sub>i</sub><sup>c</sup>) − s(z<sub>i</sub><sup>a</sup>, z<sub>j</sub><sup>a</sup>)) / τ]</div></article>
+          <article><span class="step-number" aria-hidden="true">03</span><h3>Refine toward prediction errors</h3><p>Optimize the aggregated task prediction from the aligned texture. Visibility-aware weights balance texture exposure; generation refinement targets reconstruction error.</p><div class="equation">L<sub>ref</sub> = Σ<sub>i</sub> w<sub>i</sub> log p<sub>θ</sub>(y<sub>i</sub> | X̃<sub>i</sub>(δ; γ<sub>i</sub>))</div></article>
+        </div>
+        <figure class="paper-figure framed-figure framework"><a href="assets/images/framework.webp" target="_blank" rel="noopener"><img src="assets/images/framework.webp" width="1783" height="362" loading="lazy" alt="TARA pipeline: shared texture initialization, trajectory-aware contrastive alignment, and task refinement."></a><figcaption>Trajectory-aware contrastive alignment followed by task refinement.</figcaption></figure>
+      </div>
     </section>
 
-    <section class="section-shell content-section" id="benchmark">
-      <h2>Trajectory benchmark</h2>
-      <p>We annotate surface homographies and visibility masks on EK100 and SSV2, and collect real-world print-and-capture videos. Fixed trajectories allow different textures to be compared under the same geometry and visibility.</p>
-      <div class="table-scroll"><table class="benchmark-table"><caption class="sr-only">Geometry-grounded trajectory benchmark statistics</caption><thead><tr><th scope="col">Dataset</th><th scope="col">Task</th><th scope="col">Clips</th><th scope="col">Train / Val</th><th scope="col">Annotated frames</th><th scope="col">Homography coverage</th></tr></thead><tbody>
-        <tr><th scope="row">EK100</th><td>Anticipation</td><td>605</td><td>356 / 249</td><td>19,251</td><td>73.94%</td></tr>
-        <tr><th scope="row">SSV2</th><td>Recognition</td><td>328</td><td>184 / 144</td><td>10,204</td><td>89.78%</td></tr>
-        <tr><th scope="row">Real-world</th><td>Recognition / Anticipation</td><td>348</td><td>0 / 348</td><td>8,645</td><td>81.27%</td></tr>
-      </tbody></table></div>
-      <figure class="paper-figure qa-figure"><a href="assets/images/human-review.webp" target="_blank" rel="noopener"><img src="assets/images/human-review.webp" width="1779" height="525" loading="lazy" alt="Surface-trajectory construction and human review of projection drift, occlusion, and supporting surfaces."></a><figcaption>Human review checks and repairs surface projection, tracking drift, and visibility estimates.</figcaption></figure>
-    </section>
-
-    <section class="section-shell content-section" id="experiments">
-      <h2>Experiments</h2>
-      <div class="experiment-group" id="physical">
-      <h3>Real-world print-and-capture</h3>
-      <p>We print the learned texture, attach it to real objects, and record videos under changing viewpoints, motion, and occlusion.</p>
-
-      <div id="videos" class="video-examples">
+    <section class="section-shell content-section video-examples" id="videos">
+      <div class="section-heading"><h2 class="feature-title">Trajectory videos</h2><p>Real-world print-and-capture recordings first, followed by simulated trajectory renderings from EK100 and SSV2.</p></div>
         <div class="gallery-tabs" role="tablist" aria-label="Video dataset">
           <button role="tab" id="tab-practical_anticipation" aria-selected="true" aria-controls="gallery-panel" data-group="practical_anticipation">Real-world anticipation</button>
           <button role="tab" id="tab-practical_recognition" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-group="practical_recognition">Real-world recognition</button>
@@ -92,9 +83,15 @@
         <div class="gallery-controls"><span id="gallery-range" aria-live="polite">Examples 1–2 of 10</span><div><button class="icon-button" id="gallery-prev" aria-label="Previous two video examples">←</button><button class="icon-button" id="gallery-next" aria-label="Next two video examples">→</button></div></div>
         <p class="figure-note">Videos show 32 sampled input frames at 8 fps. Anticipation labels refer to the subsequent action.</p>
         <noscript><p>Enable JavaScript to browse the examples, or <a href="assets/videos/practical_anticipation-01.mp4">watch a real-world anticipation video</a>.</p></noscript>
-      </div>
+      </section>
 
-      <h4 class="subsection-title">Attack success on captured videos</h4>
+    <section class="physical-section" id="physical">
+      <div class="section-shell content-section">
+        <div class="section-heading"><h2 class="feature-title">Physical evaluation</h2><p>Printed textures are attached to real objects and observed under natural motion and imaging conditions.</p></div>
+        <div class="physical-grid">
+          <article><p class="physical-model">V-JEPA2-L · printed textures</p><h3>Action anticipation</h3><div class="physical-comparison"><div><span>EOT</span><strong>28.6<small>%</small></strong></div><span class="comparison-arrow" aria-hidden="true">→</span><div class="ours-number"><span>TARA</span><strong>32.1<small>%</small></strong></div></div></article>
+          <article><p class="physical-model">V-JEPA2-L · printed textures</p><h3>Action recognition</h3><div class="physical-comparison"><div><span>EOT</span><strong>23.1<small>%</small></strong></div><span class="comparison-arrow" aria-hidden="true">→</span><div class="ours-number"><span>TARA</span><strong>28.2<small>%</small></strong></div></div></article>
+        </div>
       <div class="table-scroll"><table class="physical-table" id="physical-results"><caption class="sr-only">Top-1 attack success rate (%) on real-world captured data</caption><thead>
         <tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">Action anticipation</th><th scope="colgroup" colspan="2">Action recognition</th></tr>
         <tr><th scope="col">V-JEPA2-L</th><th scope="col">V-JEPA2.1-B</th><th scope="col">V-JEPA2-L</th><th scope="col">InternVideo2</th></tr>
@@ -112,10 +109,12 @@
         <tr class="ours-row"><th scope="row">Printed TARA</th><td class="best">32.1</td><td aria-label="Not available">—</td><td class="best">28.2</td><td aria-label="Not available">—</td></tr>
       </tbody></table></div>
       <p class="figure-note">Top-1 ASR (%). Digital projection uses recorded geometry and visibility masks; print-and-recapture uses physical textures and matched white-patch references. The two protocols are evaluated separately. — indicates an unavailable result.</p>
+      <figure class="paper-figure framed-figure distortion-figure"><a href="assets/images/distortion.webp" target="_blank" rel="noopener"><img src="assets/images/distortion.webp" width="1779" height="500" loading="lazy" alt="TARA attack success under simulated print-and-capture distortions on EK100 and SSV2."></a><figcaption>ASR under simulated print–capture distortions. Strong spatial blur has a greater effect than brightness changes, compression, or sensor noise.</figcaption></figure>
       </div>
+    </section>
 
-      <div class="experiment-group" id="results">
-      <h3>Benchmark results</h3>
+    <section class="section-shell content-section" id="results">
+      <h2 class="feature-title">Main results</h2>
       <p>We evaluate action anticipation on EK100, action recognition on SSV2, and future frame generation with DiLA.</p>
       <div class="result-toolbar"><div class="segmented" role="group" aria-label="Result task"><button class="selected" data-result="anticipation" aria-pressed="true">Anticipation</button><button data-result="recognition" aria-pressed="false">Recognition</button><button data-result="generation" aria-pressed="false">Frame generation</button></div><div class="segmented split-control" role="group" aria-label="Result split"><button class="selected" data-split="val" aria-pressed="true">Val</button><button data-split="train" aria-pressed="false">Train</button></div></div>
       <p class="result-summary" id="result-summary" aria-live="polite"></p>
@@ -124,19 +123,23 @@
       <figure class="paper-figure generation-figure" id="generation-figure" hidden><a href="assets/images/generation.webp" target="_blank" rel="noopener"><img src="assets/images/generation.webp" width="1779" height="983" loading="lazy" alt="Five DiLA validation examples: clean target frames, clean reconstructions, attacked reconstructions, and error changes."></a><figcaption>Selected high-error DiLA validation examples. Reconstruction changes extend beyond the texture region.</figcaption></figure>
       <noscript><p>Full comparisons are available in Tables 2–4 of the paper.</p></noscript>
 
-      <h3>Generalization across content and trajectories</h3>
-      <p>We evaluate frozen textures without further optimization while changing video content and observation trajectories independently.</p>
-      <div class="table-scroll" id="generalization-grid"></div>
+      <h3 class="generalization-title">Generalization beyond training observations</h3>
+      <p>Frozen textures under independent changes in content and observation trajectory.</p>
+      <div class="generalization-grid" id="generalization-grid"></div>
+      <div class="chart-legend"><span class="legend-dot ours" aria-hidden="true"></span>TARA<span class="legend-dot baseline" aria-hidden="true"></span>EOT</div>
       <p class="figure-note">Top-1 ASR (%), V-JEPA2-L on EK100. Each condition uses 74 clip instances; unseen content comes from 35 independently captured recordings.</p>
 
-      <h3>Print–capture robustness</h3>
-      <figure class="paper-figure distortion-figure"><a href="assets/images/distortion.webp" target="_blank" rel="noopener"><img src="assets/images/distortion.webp" width="1779" height="500" loading="lazy" alt="TARA attack success under simulated print-and-capture distortions on EK100 and SSV2."></a><figcaption>ASR under simulated print–capture distortions. Strong spatial blur has a greater effect than brightness changes, compression, or sensor noise.</figcaption></figure>
-      </div>
     </section>
 
-    <section class="section-shell content-section" id="conclusion">
-      <h2>Conclusion</h2>
-      <p>TARA shows that a single surface-attached texture can disrupt video understanding and prediction across changing observation trajectories. Contrastive alignment followed by task refinement improves shared-texture optimization, while print-and-capture experiments show that the threat extends beyond digital rendering.</p>
+    <section class="section-shell content-section" id="benchmark">
+      <h2>Trajectory benchmark</h2>
+      <p>We annotate surface homographies and visibility masks on EK100 and SSV2, and collect real-world print-and-capture videos. Fixed trajectories allow different textures to be compared under the same geometry and visibility.</p>
+      <div class="table-scroll"><table class="benchmark-table"><caption class="sr-only">Geometry-grounded trajectory benchmark statistics</caption><thead><tr><th scope="col">Dataset</th><th scope="col">Task</th><th scope="col">Clips</th><th scope="col">Train / Val</th><th scope="col">Annotated frames</th><th scope="col">Homography coverage</th></tr></thead><tbody>
+        <tr><th scope="row">EK100</th><td>Anticipation</td><td>605</td><td>356 / 249</td><td>19,251</td><td>73.94%</td></tr>
+        <tr><th scope="row">SSV2</th><td>Recognition</td><td>328</td><td>184 / 144</td><td>10,204</td><td>89.78%</td></tr>
+        <tr><th scope="row">Real-world</th><td>Recognition / Anticipation</td><td>348</td><td>0 / 348</td><td>8,645</td><td>81.27%</td></tr>
+      </tbody></table></div>
+      <figure class="paper-figure qa-figure"><a href="assets/images/human-review.webp" target="_blank" rel="noopener"><img src="assets/images/human-review.webp" width="1779" height="525" loading="lazy" alt="Surface-trajectory construction and human review of projection drift, occlusion, and supporting surfaces."></a><figcaption>Human review checks and repairs surface projection, tracking drift, and visibility estimates.</figcaption></figure>
     </section>
 
     <section class="section-shell content-section citation-section" id="citation">
