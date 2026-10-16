@@ -67,13 +67,7 @@ function renderResults() {
   document.querySelector(".split-control").hidden = generation;
   document.querySelector("#generation-figure").hidden = !generation;
   const summary = document.querySelector("#result-summary");
-  if (generation) {
-    summary.innerHTML = "<strong>DiLA validation:</strong> TARA reduces PSNR to <strong>12.66 dB</strong> and increases MSE to <strong>67.37 × 10⁻³</strong>, compared with 15.58 dB and 33.27 × 10⁻³ for UPA-RFAS.";
-  } else {
-    const ours = data.rows.find(row => row[0] === "TARA")[index][3];
-    const bestBaseline = Math.max(...data.rows.filter(row => !["TARA", "Black texture", "Random texture"].includes(row[0])).map(row => row[index][3]));
-    summary.innerHTML = `<strong>${data.title} · ${resultSplit === "val" ? "Validation" : "Training"}:</strong> TARA achieves <strong>${ours.toFixed(1)}% average ASR</strong>, a <strong>+${(ours - bestBaseline).toFixed(1)} pp</strong> gain over the strongest baseline average.`;
-  }
+  summary.textContent = `${data.title} · ${generation ? "Train and Val" : resultSplit === "val" ? "Validation" : "Training"}`;
   const table = element("table", `result-table${generation ? " generation-table" : ""}`);
   const caption = element("caption", "sr-only", `${data.title}; ${generation ? "Train and Val" : resultSplit}; ${generation ? "PSNR in dB and MSE in units of 0.001" : "Top-1 ASR in percent"}`);
   table.append(caption);
@@ -95,24 +89,22 @@ function renderResults() {
   table.append(tbody);
   document.querySelector("#result-table").replaceChildren(table);
   document.querySelector("#result-note").textContent = generation
-    ? "PSNR in dB; MSE in units of 10⁻³. Metrics are measured against clean target frames. Lower PSNR and higher MSE indicate reconstruction degradation. 155 Train / 82 Val clips. Paper Table 4."
-    : "Top-1 ASR (%) is computed on initially clean-correct examples. Avg. is the unweighted mean across models. Bold entries are column-wise maxima; model-specific subsets and temporal protocols are detailed in the paper.";
+    ? "PSNR (dB) ↓; MSE (×10⁻³) ↑, measured against clean target frames. 155 Train / 82 Val clips."
+    : "Top-1 ASR (%) ↑, conditioned on clean-correct predictions. Avg. is the mean across models; bold marks the best result in each column.";
 }
 
 function renderGeneralization() {
-  const grid = document.querySelector("#generalization-grid");
-  GENERALIZATION.forEach(([content, trajectory, ours, eot]) => {
-    const cell = element("article", "generalization-cell");
-    const heading = element("h4"); heading.append(content, element("br"), trajectory); cell.append(heading);
-    [[ours, false], [eot, true]].forEach(([value, baseline]) => {
-      const barRow = element("div", `mini-bar${baseline ? " baseline" : ""}`);
-      barRow.setAttribute("aria-label", `${baseline ? "EOT" : "TARA"}: ${value}% ASR`);
-      const track = element("span", "bar-track");
-      const bar = element("span", "bar"); bar.style.width = `${value / 50 * 100}%`;
-      track.append(bar); barRow.append(track, element("strong", "", `${value.toFixed(1)}%`)); cell.append(barRow);
-    });
-    grid.append(cell);
+  const table = element("table", "generalization-table");
+  table.innerHTML = '<caption class="sr-only">Content and trajectory generalization: Top-1 ASR (%)</caption><thead><tr><th rowspan="2" scope="col">Method</th><th colspan="2" scope="colgroup">Seen content</th><th colspan="2" scope="colgroup">Unseen content</th></tr><tr><th scope="col">Seen traj.</th><th scope="col">Unseen traj.</th><th scope="col">Seen traj.</th><th scope="col">Unseen traj.</th></tr></thead>';
+  const body = element("tbody");
+  [["EOT", 3], ["TARA", 2]].forEach(([name, index]) => {
+    const row = element("tr", name === "TARA" ? "ours-row" : "");
+    const heading = element("th", "", name); heading.scope = "row"; row.append(heading);
+    GENERALIZATION.forEach(condition => row.append(element("td", name === "TARA" ? "best" : "", condition[index].toFixed(1))));
+    body.append(row);
   });
+  table.append(body);
+  document.querySelector("#generalization-grid").replaceChildren(table);
 }
 
 function renderGallery() {
@@ -131,12 +123,10 @@ function renderGallery() {
     });
     video.setAttribute("aria-label", `${row.label}; ${row.kind}; 32 sampled input frames`);
     const body = element("div", "video-card-body");
-    const heading = element("div", "video-card-heading");
-    heading.append(element("span", "video-tag", row.group.startsWith("practical") ? "Physical print & capture" : "Digital trajectory rendering"), element("span", "video-frame-count", "32 INPUT FRAMES"));
     const meta = element("div", "video-meta");
-    const link = element("a", "", "All 32 frames ↗"); link.href = row.montage; link.target = "_blank"; link.rel = "noopener";
-    meta.append(element("span", "", row.id), link);
-    body.append(heading, element("h3", "", row.label), meta);
+    const link = element("a", "", "View all 32 frames"); link.href = row.montage; link.target = "_blank"; link.rel = "noopener";
+    meta.append(link);
+    body.append(element("h3", "", row.label), meta);
     card.append(video, body); return card;
   });
   grid.replaceChildren(...cards);

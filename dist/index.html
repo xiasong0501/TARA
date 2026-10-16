@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#faf9f6">
-  <meta name="description" content="TARA learns a single printable adversarial texture that generalizes across video content and object–camera trajectories. Explore the method, benchmarks, results, and real-world captures.">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="TARA: a single surface-attached adversarial texture across video content and object–camera trajectories. Real-world videos, method, and experimental results.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Across Viewpoints and Time · TARA">
   <meta property="og:description" content="Trajectory-Generalizable Physical Attacks on World Models and Video Understanding Models.">
@@ -21,109 +21,124 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
-    <nav class="nav-shell" aria-label="Main navigation">
-      <a class="wordmark" href="#top" aria-label="TARA home"><span class="logo-mark" aria-hidden="true">T</span>TARA<span class="wordmark-detail">RESEARCH</span></a>
-      <div class="nav-links"><a href="#physical">Physical</a><a href="#videos">Videos</a><a href="#method">Method</a><a href="#results">Results</a><a href="#benchmark">Benchmark</a></div>
-      <a class="nav-paper" href="assets/paper/tara-paper.pdf" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+    <nav class="section-shell nav-shell" aria-label="Main navigation">
+      <a class="wordmark" href="#top">TARA</a>
+      <div class="nav-links">
+        <a href="#physical">Real-world</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#benchmark">Dataset</a>
+        <a href="#citation">Citation</a>
+      </div>
     </nav>
   </header>
+
   <main id="main">
     <section class="hero section-shell" id="top">
-      <p class="eyebrow"><span class="status-dot"></span>Under Review <span class="separator">/</span> Research project</p>
-      <h1>Across Viewpoints<br>and <em>Time.</em></h1>
-      <p class="paper-title">Trajectory-Generalizable Physical Attacks on<br class="desktop-break"> World Models and Video Understanding Models</p>
-      <p class="authors">Song Xia<sup>1</sup> <span>·</span> Meiewen Ding<sup>1</sup> <span>·</span> Chenqi Kong<sup>2</sup> <span>·</span> Wenhan Yang<sup>3</sup> <span>·</span> Xudong Jiang<sup>1</sup></p>
+      <h1>Across Viewpoints and Time:<br><span>Trajectory-Generalizable Physical Attacks on<br class="desktop-break"> World Models and Video Understanding Models</span></h1>
+      <p class="authors">Song Xia<sup>1</sup>, Meiewen Ding<sup>1</sup>, Chenqi Kong<sup>2</sup>, Wenhan Yang<sup>3</sup>, Xudong Jiang<sup>1</sup></p>
       <p class="affiliations"><span><sup>1</sup> Nanyang Technological University</span><span><sup>2</sup> National University of Singapore</span><span><sup>3</sup> Pengcheng Lab</span></p>
-      <div class="hero-actions"><a class="button primary" href="assets/paper/tara-paper.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7zM14 3v5h5M10 12h5M10 16h5"/></svg>Read the paper</a><button class="button code-placeholder" disabled>Code <span>· to be updated</span></button><a class="button secondary" href="#videos"><span aria-hidden="true">▷</span> Explore the trajectories</a><a class="text-link" href="#citation">Citation <span aria-hidden="true">↘</span></a></div>
-      <p class="hero-lead">One texture stays fixed on an object.<br>Its viewpoint, scale, and visibility keep changing.</p>
-      <p class="hero-description"><strong>TARA</strong> learns a shared printable texture through trajectory-aware contrastive alignment and task refinement, exposing vulnerabilities in video understanding and prediction under dynamic physical observation.</p>
-    </section>
-
-    <div class="section-shell">
-      <figure class="paper-figure teaser"><a href="assets/images/teaser.webp" target="_blank" rel="noopener" aria-label="Open the overview figure at full resolution"><img src="assets/images/teaser.webp" width="1779" height="588" alt="A single printed adversarial texture observed along three EK100 trajectories, with occlusion, deformation, scale changes, and re-entry." fetchpriority="high"></a><figcaption>A single surface-attached texture, observed across changing object–camera trajectories. Figure 1 from the submitted manuscript.</figcaption></figure>
-      <div class="headline-results" aria-label="Selected results reported in the paper">
-        <div><span class="stat-context">EK100 · anticipation</span><strong>41.1<span>%</span></strong><span class="stat-label">Average validation Top-1 ASR</span><span class="stat-comparison">+5.4 pp over EOT</span></div>
-        <div><span class="stat-context">SSV2 · recognition</span><strong>26.0<span>%</span></strong><span class="stat-label">Average validation Top-1 ASR</span><span class="stat-comparison">+5.8 pp over EOT</span></div>
-        <div><span class="stat-context">Physical · anticipation</span><strong>32.1<span>%</span></strong><span class="stat-label">Print-and-recapture ASR · V-JEPA2-L</span><span class="stat-comparison">+3.5 pp over printed EOT</span></div>
+      <p class="publication-status">Under review</p>
+      <div class="hero-actions">
+        <a class="button primary" href="assets/paper/tara-paper.pdf" target="_blank" rel="noopener">Paper</a>
+        <button class="button code-placeholder" disabled>Code <span>(to be updated)</span></button>
+        <a class="button secondary" href="#videos">Videos</a>
       </div>
-    </div>
-
-    <section class="physical-section" id="physical">
-      <div class="section-shell content-section">
-        <div class="section-heading"><div><p class="eyebrow">01 / PHYSICAL EVALUATION</p><h2>From rendering to print and capture.</h2></div><p>Printed textures are attached to real objects and observed under natural motion and imaging conditions.</p></div>
-        <div class="physical-grid"><article><div class="small-label">V-JEPA2-L · printed textures</div><h3>Action anticipation</h3><div class="physical-comparison"><div><span>EOT</span><strong>28.6<small>%</small></strong></div><span class="comparison-arrow" aria-hidden="true">→</span><div class="ours-number"><span>TARA</span><strong>32.1<small>%</small></strong></div></div></article><article><div class="small-label">V-JEPA2-L · printed textures</div><h3>Action recognition</h3><div class="physical-comparison"><div><span>EOT</span><strong>23.1<small>%</small></strong></div><span class="comparison-arrow" aria-hidden="true">→</span><div class="ours-number"><span>TARA</span><strong>28.2<small>%</small></strong></div></div></article></div>
-        <div class="table-scroll physical-table-wrap"><table class="physical-table" id="physical-results"><caption>Real-world captured data · Top-1 ASR (%) ↑</caption><thead><tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">Action anticipation</th><th scope="colgroup" colspan="2">Action recognition</th></tr><tr><th scope="col">V-JEPA2-L</th><th scope="col">V-JEPA2.1-B</th><th scope="col">V-JEPA2-L</th><th scope="col">InternVideo2</th></tr></thead><tbody>
-          <tr class="protocol-row"><th colspan="5" scope="rowgroup">Digital projection along recorded trajectories</th></tr>
-          <tr><th scope="row">EOT</th><td>29.7</td><td class="best">58.8</td><td>21.2</td><td>40.3</td></tr>
-          <tr><th scope="row">Patch-Fool</th><td>17.6</td><td>23.5</td><td>10.6</td><td>35.5</td></tr>
-          <tr><th scope="row">UPA-RFAS</th><td>18.9</td><td>17.6</td><td>11.8</td><td>43.5</td></tr>
-          <tr><th scope="row">BTC-UAP</th><td>14.9</td><td>17.6</td><td>12.9</td><td>24.2</td></tr>
-          <tr><th scope="row">PhyCamo</th><td>13.5</td><td>29.4</td><td>17.6</td><td>38.7</td></tr>
-          <tr class="ours-row"><th scope="row">TARA</th><td class="best">32.4</td><td class="best">58.8</td><td class="best">25.8</td><td class="best">50.0</td></tr>
-        </tbody><tbody>
-          <tr class="protocol-row"><th colspan="5" scope="rowgroup">Physical print and recapture</th></tr>
-          <tr><th scope="row">Printed EOT</th><td>28.6</td><td aria-label="Not available">—</td><td>23.1</td><td aria-label="Not available">—</td></tr>
-          <tr class="ours-row"><th scope="row">Printed TARA</th><td class="best">32.1</td><td aria-label="Not available">—</td><td class="best">28.2</td><td aria-label="Not available">—</td></tr>
-        </tbody></table></div>
-        <p class="figure-note">Paper Table 5. Digital projection uses recorded homographies and masks; physical evaluation uses printed textures and matched white-patch recordings. The two protocols are reported separately; — denotes an unavailable result.</p>
-        <a class="button secondary physical-video-link" href="#videos">Watch the real-world videos <span aria-hidden="true">↓</span></a>
-        <figure class="paper-figure distortion-figure"><a href="assets/images/distortion.webp" target="_blank" rel="noopener"><img src="assets/images/distortion.webp" width="1779" height="500" loading="lazy" alt="TARA attack success under increasing simulated print-and-capture distortion levels, for EK100 anticipation and SSV2 recognition."></a><figcaption>Simulated print-and-capture distortions. Brightness changes, Gaussian noise, and JPEG compression preserve relatively stable ASR, while stronger patch and capture blur suppress fine texture detail.</figcaption></figure>
-      </div>
+      <p class="hero-summary"><strong>TARA</strong> learns a single adversarial texture that stays attached to an object and remains effective across different videos, viewpoints, and observation trajectories.</p>
     </section>
 
-    <section class="section-shell content-section" id="videos">
-      <div class="section-heading"><div><p class="eyebrow">02 / SEE THE TRAJECTORIES</p><h2>A fixed patch, seen in motion.</h2></div><p>Start with real-world print-and-capture videos, then explore the rendered benchmarks.</p></div>
-      <div class="gallery-tabs" role="tablist" aria-label="Video dataset"><button role="tab" id="tab-practical_anticipation" aria-selected="true" aria-controls="gallery-panel" data-group="practical_anticipation">Real-world <span>Anticipation</span></button><button role="tab" id="tab-practical_recognition" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-group="practical_recognition">Real-world <span>Recognition</span></button><button role="tab" id="tab-ek100" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-group="ek100">EK100 <span>Rendered</span></button><button role="tab" id="tab-ssv2" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-group="ssv2">SSV2 <span>Rendered</span></button></div>
-      <div id="gallery-panel" role="tabpanel" aria-labelledby="tab-practical_anticipation"><div class="gallery-grid" id="gallery-grid"></div></div>
-      <div class="gallery-controls"><span id="gallery-range" aria-live="polite">Examples 1–2 of 10</span><div><button class="icon-button" id="gallery-prev" aria-label="Previous two video examples">←</button><button class="icon-button" id="gallery-next" aria-label="Next two video examples">→</button></div></div>
-      <p class="figure-note">Each video shows the same 32 sampled model-input frames as its contact sheet, played at 8 fps for inspection. Digital examples use rendered TARA textures; real-world examples show physically printed textures. Anticipation labels refer to the future action.</p>
-      <noscript><p>Enable JavaScript to browse all examples, or <a href="assets/videos/practical_anticipation-01.mp4">watch a physical anticipation example</a>.</p></noscript>
-    </section>
+    <section class="section-shell content-section" id="physical">
+      <h2>Real-world experiments</h2>
+      <p>We print the learned texture, attach it to real objects, and record videos under changing viewpoints, motion, and occlusion.</p>
 
-    <section class="method-section" id="method">
-      <div class="section-shell content-section">
-        <div class="section-heading"><div><p class="eyebrow">03 / THE METHOD</p><h2>Align first. Refine for the task.</h2></div><p>Heterogeneous videos and trajectories produce conflicting texture gradients. TARA builds a more compatible starting point for shared optimization.</p></div>
-        <div class="method-steps">
-          <article><span class="step-number">01</span><h3>Render along a trajectory</h3><p>Attach one canonical texture to a surface. Frame-wise homographies and visibility masks account for motion, perspective, and occlusion.</p><div class="equation">γ<sub>i</sub> = {(H<sub>it</sub>, M<sub>it</sub>)}<sub>t=1</sub><sup>T</sup></div></article>
-          <article><span class="step-number">02</span><h3>Align attacked representations</h3><p>Bring attacked features from different video–trajectory instances toward a shared region, while separating them from their own clean features.</p><div class="equation">L<sub>con</sub> = mean<sub>i≠j</sub> softplus[(s(z<sub>i</sub><sup>a</sup>, z<sub>i</sub><sup>c</sup>) − s(z<sub>i</sub><sup>a</sup>, z<sub>j</sub><sup>a</sup>)) / τ]</div></article>
-          <article><span class="step-number">03</span><h3>Refine toward prediction errors</h3><p>Optimize the model's aggregated task prediction from the aligned texture. Visibility-aware weights balance different levels of texture exposure.</p><div class="equation">L<sub>ref</sub> = Σ<sub>i</sub> w<sub>i</sub> log p<sub>θ</sub>(y<sub>i</sub> | X̃<sub>i</sub>(δ; γ<sub>i</sub>))</div></article>
+      <div id="videos" class="video-examples">
+        <div class="gallery-tabs" role="tablist" aria-label="Video dataset">
+          <button role="tab" id="tab-practical_anticipation" aria-selected="true" aria-controls="gallery-panel" data-group="practical_anticipation">Real-world anticipation</button>
+          <button role="tab" id="tab-practical_recognition" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-group="practical_recognition">Real-world recognition</button>
+          <button role="tab" id="tab-ek100" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-group="ek100">EK100 <span>(rendered)</span></button>
+          <button role="tab" id="tab-ssv2" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-group="ssv2">SSV2 <span>(rendered)</span></button>
         </div>
-        <figure class="paper-figure framework"><a href="assets/images/framework.webp" target="_blank" rel="noopener" aria-label="Open the TARA framework at full resolution"><img src="assets/images/framework.webp" width="1783" height="362" loading="lazy" alt="TARA framework: black texture initialization, trajectory-aware contrastive alignment, then trajectory-conditioned task refinement."></a><figcaption>The two-stage TARA framework. For future frame generation, refinement instead targets reconstruction degradation.</figcaption></figure>
+        <div id="gallery-panel" role="tabpanel" aria-labelledby="tab-practical_anticipation"><div class="gallery-grid" id="gallery-grid"></div></div>
+        <div class="gallery-controls"><span id="gallery-range" aria-live="polite">Examples 1–2 of 10</span><div><button class="icon-button" id="gallery-prev" aria-label="Previous two video examples">←</button><button class="icon-button" id="gallery-next" aria-label="Next two video examples">→</button></div></div>
+        <p class="figure-note">Videos show 32 sampled input frames at 8 fps. Anticipation labels refer to the subsequent action.</p>
+        <noscript><p>Enable JavaScript to browse the examples, or <a href="assets/videos/practical_anticipation-01.mp4">watch a real-world anticipation video</a>.</p></noscript>
       </div>
+
+      <h3>Attack success on captured videos</h3>
+      <div class="table-scroll"><table class="physical-table" id="physical-results"><caption class="sr-only">Top-1 attack success rate (%) on real-world captured data</caption><thead>
+        <tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">Action anticipation</th><th scope="colgroup" colspan="2">Action recognition</th></tr>
+        <tr><th scope="col">V-JEPA2-L</th><th scope="col">V-JEPA2.1-B</th><th scope="col">V-JEPA2-L</th><th scope="col">InternVideo2</th></tr>
+      </thead><tbody>
+        <tr class="protocol-row"><th colspan="5" scope="rowgroup">Digital projection along recorded trajectories</th></tr>
+        <tr><th scope="row">EOT</th><td>29.7</td><td class="best">58.8</td><td>21.2</td><td>40.3</td></tr>
+        <tr><th scope="row">Patch-Fool</th><td>17.6</td><td>23.5</td><td>10.6</td><td>35.5</td></tr>
+        <tr><th scope="row">UPA-RFAS</th><td>18.9</td><td>17.6</td><td>11.8</td><td>43.5</td></tr>
+        <tr><th scope="row">BTC-UAP</th><td>14.9</td><td>17.6</td><td>12.9</td><td>24.2</td></tr>
+        <tr><th scope="row">PhyCamo</th><td>13.5</td><td>29.4</td><td>17.6</td><td>38.7</td></tr>
+        <tr class="ours-row"><th scope="row">TARA</th><td class="best">32.4</td><td class="best">58.8</td><td class="best">25.8</td><td class="best">50.0</td></tr>
+      </tbody><tbody>
+        <tr class="protocol-row"><th colspan="5" scope="rowgroup">Physical print and recapture</th></tr>
+        <tr><th scope="row">Printed EOT</th><td>28.6</td><td aria-label="Not available">—</td><td>23.1</td><td aria-label="Not available">—</td></tr>
+        <tr class="ours-row"><th scope="row">Printed TARA</th><td class="best">32.1</td><td aria-label="Not available">—</td><td class="best">28.2</td><td aria-label="Not available">—</td></tr>
+      </tbody></table></div>
+      <p class="figure-note">Top-1 ASR (%). Digital projection uses recorded geometry and visibility masks; print-and-recapture uses physical textures and matched white-patch references. The two protocols are evaluated separately. — indicates an unavailable result.</p>
+    </section>
+
+    <section class="section-shell content-section" id="method">
+      <h2>Method</h2>
+      <p>One shared texture must work across videos with different content and surface-observation trajectories. Their task gradients can conflict, making direct universal optimization difficult.</p>
+      <figure class="paper-figure teaser"><a href="assets/images/teaser.webp" target="_blank" rel="noopener"><img src="assets/images/teaser.webp" width="1779" height="588" loading="lazy" alt="The same surface-attached texture observed across changing viewpoints, scale, deformation, and occlusion."></a><figcaption>The same texture is observed under different object–camera trajectories.</figcaption></figure>
+      <p>TARA uses frame-wise homographies and visibility masks to render the texture along each trajectory, then optimizes it in two stages:</p>
+      <ol class="method-stages">
+        <li><strong>Contrastive alignment.</strong> Bring attacked representations from different video–trajectory instances closer together while separating them from their own clean representations.</li>
+        <li><strong>Task refinement.</strong> Starting from the aligned texture, optimize prediction errors with visibility-aware weights. For future frame generation, refine against reconstruction error.</li>
+      </ol>
+      <figure class="paper-figure framework"><a href="assets/images/framework.webp" target="_blank" rel="noopener"><img src="assets/images/framework.webp" width="1783" height="362" loading="lazy" alt="TARA pipeline: shared texture initialization, trajectory-aware contrastive alignment, and task refinement."></a><figcaption>Trajectory-aware contrastive alignment followed by task refinement.</figcaption></figure>
     </section>
 
     <section class="section-shell content-section" id="results">
-      <div class="section-heading"><div><p class="eyebrow">04 / RESULTS</p><h2>Three tasks. Six video models.</h2></div><p>Results transcribed from the submitted paper. Switch tasks and splits to inspect the comparisons.</p></div>
+      <h2>Experimental results</h2>
+      <p>We evaluate action anticipation on EK100, action recognition on SSV2, and future frame generation with DiLA.</p>
       <div class="result-toolbar"><div class="segmented" role="group" aria-label="Result task"><button class="selected" data-result="anticipation" aria-pressed="true">Anticipation</button><button data-result="recognition" aria-pressed="false">Recognition</button><button data-result="generation" aria-pressed="false">Frame generation</button></div><div class="segmented split-control" role="group" aria-label="Result split"><button class="selected" data-split="val" aria-pressed="true">Val</button><button data-split="train" aria-pressed="false">Train</button></div></div>
-      <div class="result-summary" id="result-summary" aria-live="polite"></div>
+      <p class="result-summary" id="result-summary" aria-live="polite"></p>
       <div class="table-scroll" id="result-table"></div>
-      <p class="figure-note" id="result-note">Top-1 ASR (%) is computed on initially clean-correct examples. “Avg.” is the unweighted mean across models.</p>
-      <figure class="paper-figure generation-figure" id="generation-figure" hidden><a href="assets/images/generation.webp" target="_blank" rel="noopener"><img src="assets/images/generation.webp" width="1779" height="983" loading="lazy" alt="Five DiLA validation examples, showing ground truth, clean generation, adversarial generation, and per-pixel error."></a><figcaption>Selected DiLA validation examples with high outside-patch MSE gain. Changes extend beyond the texture region into the conditional reconstruction.</figcaption></figure>
-      <noscript><p>TARA validation ASR: EK100 41.1% model average; SSV2 26.0% model average. Full comparisons appear in Tables 2–4 of the paper.</p></noscript>
+      <p class="figure-note" id="result-note">Top-1 ASR is conditioned on clean-correct predictions. Avg. is the mean across models.</p>
+      <figure class="paper-figure generation-figure" id="generation-figure" hidden><a href="assets/images/generation.webp" target="_blank" rel="noopener"><img src="assets/images/generation.webp" width="1779" height="983" loading="lazy" alt="Five DiLA validation examples: clean target frames, clean reconstructions, attacked reconstructions, and error changes."></a><figcaption>Selected high-error DiLA validation examples. Reconstruction changes extend beyond the texture region.</figcaption></figure>
+      <noscript><p>Full comparisons are available in Tables 2–4 of the paper.</p></noscript>
 
-      <div class="subsection-heading"><h3>Generalization beyond training observations</h3><p>Frozen textures under independent changes in content and observation trajectory.</p></div>
-      <div class="generalization-grid" id="generalization-grid"></div>
-      <div class="chart-legend"><span class="legend-dot ours"></span>TARA<span class="legend-dot baseline"></span>EOT</div>
-      <p class="figure-note">Top-1 ASR on 74 eligible clip instances per condition (Appendix Table 7). Unseen-content instances come from 35 independently captured recordings; frozen textures receive no further adaptation.</p>
+      <h3>Generalization across content and trajectories</h3>
+      <p>We evaluate frozen textures without further optimization while changing video content and observation trajectories independently.</p>
+      <div class="table-scroll" id="generalization-grid"></div>
+      <p class="figure-note">Top-1 ASR (%), V-JEPA2-L on EK100. Each condition uses 74 clip instances; unseen content comes from 35 independently captured recordings.</p>
+
+      <h3>Print–capture robustness</h3>
+      <figure class="paper-figure distortion-figure"><a href="assets/images/distortion.webp" target="_blank" rel="noopener"><img src="assets/images/distortion.webp" width="1779" height="500" loading="lazy" alt="TARA attack success under simulated print-and-capture distortions on EK100 and SSV2."></a><figcaption>ASR under simulated print–capture distortions. Strong spatial blur has a greater effect than brightness changes, compression, or sensor noise.</figcaption></figure>
     </section>
 
     <section class="section-shell content-section" id="benchmark">
-      <div class="section-heading"><div><p class="eyebrow">05 / THE BENCHMARK</p><h2>Grounded in surfaces and trajectories.</h2></div><p>Temporally consistent geometry makes texture comparisons reproducible under the same observation conditions.</p></div>
-      <div class="table-scroll"><table class="benchmark-table"><caption class="sr-only">Geometry-grounded trajectory benchmark statistics from paper Table 1</caption><thead><tr><th scope="col">Dataset</th><th scope="col">Task</th><th scope="col">Clips</th><th scope="col">Train / Val</th><th scope="col">Annotated frames</th><th scope="col">Homography coverage</th></tr></thead><tbody><tr><th scope="row">EK100</th><td>Anticipation</td><td>605</td><td>356 / 249</td><td>19,251</td><td>73.94%</td></tr><tr><th scope="row">SSV2</th><td>Recognition</td><td>328</td><td>184 / 144</td><td>10,204</td><td>89.78%</td></tr><tr><th scope="row">Real-world</th><td>Recognition / Anticipation</td><td>348</td><td>0 / 348</td><td>8,645</td><td>81.27%</td></tr></tbody></table></div>
-      <p class="figure-note">Dataset-level statistics from paper Table 1. Model-specific attack cohorts, temporal inputs, and geometric validity rules are detailed in the appendix.</p>
-      <figure class="paper-figure qa-figure"><a href="assets/images/human-review.webp" target="_blank" rel="noopener"><img src="assets/images/human-review.webp" width="1779" height="525" loading="lazy" alt="Human-guided surface trajectory construction: select an attachment region, estimate homography, estimate visibility, and manually review uncertain projections."></a><figcaption>Human review anchors the geometry pipeline: select a feasible surface, track its projection, estimate visible support, and inspect drift or inconsistent occlusion.</figcaption></figure>
-      <details class="abstract"><summary>Read the abstract <span aria-hidden="true">+</span></summary><p>World models and video understanding models are increasingly deployed in dynamic visual environments, yet their robustness to physical adversarial threats remains largely underexplored. We study whether a single physical adversarial texture can mislead the victim model across different real-world scenarios where observing viewpoints vary along uncontrolled object–camera trajectories. We identify that heterogeneous video semantics and trajectories induce poorly aligned gradients for optimizing the adversarial texture. To address that, we propose the Trajectory-aware adversarial Alignment and Refinement Attack (TARA), which incorporates trajectory-aware optimization to capture the evolving geometric variations of a printed texture under real-world scenarios. To improve cross-instance optimization compatibility, TARA incorporates trajectory-aware contrastive alignment to encourage attacked representations from diverse video–trajectory instances to approach a shared adversarial region and then performs trajectory-aware task refinement to translate the aligned representation into task-level prediction errors. For reproducible evaluation, we develop a geometry-grounded tracking pipeline that provides physically plausible adversarial regions with temporally consistent trajectories on EPIC-KITCHENS-100 and Something-Something V2. We further collect real-world print-and-recapture videos to validate attack effectiveness under physical deployment conditions. Together, the annotated benchmarks and real-world captured data form a reproducible testbed for future evaluation. Notably, our results reveal that a single printable adversarial texture can persistently disrupt world models and video understanding models under physical conditions, highlighting the fundamental security challenge.</p></details>
+      <h2>Trajectory benchmark</h2>
+      <p>We annotate surface homographies and visibility masks on EK100 and SSV2, and collect real-world print-and-capture videos. Fixed trajectories allow different textures to be compared under the same geometry and visibility.</p>
+      <div class="table-scroll"><table class="benchmark-table"><caption class="sr-only">Geometry-grounded trajectory benchmark statistics</caption><thead><tr><th scope="col">Dataset</th><th scope="col">Task</th><th scope="col">Clips</th><th scope="col">Train / Val</th><th scope="col">Annotated frames</th><th scope="col">Homography coverage</th></tr></thead><tbody>
+        <tr><th scope="row">EK100</th><td>Anticipation</td><td>605</td><td>356 / 249</td><td>19,251</td><td>73.94%</td></tr>
+        <tr><th scope="row">SSV2</th><td>Recognition</td><td>328</td><td>184 / 144</td><td>10,204</td><td>89.78%</td></tr>
+        <tr><th scope="row">Real-world</th><td>Recognition / Anticipation</td><td>348</td><td>0 / 348</td><td>8,645</td><td>81.27%</td></tr>
+      </tbody></table></div>
+      <figure class="paper-figure qa-figure"><a href="assets/images/human-review.webp" target="_blank" rel="noopener"><img src="assets/images/human-review.webp" width="1779" height="525" loading="lazy" alt="Surface-trajectory construction and human review of projection drift, occlusion, and supporting surfaces."></a><figcaption>Human review checks and repairs surface projection, tracking drift, and visibility estimates.</figcaption></figure>
     </section>
 
-    <section class="citation-section" id="citation"><div class="section-shell"><div class="section-heading"><div><p class="eyebrow">REFERENCE</p><h2>Citation</h2></div><button class="button secondary" id="copy-citation">Copy BibTeX</button></div><pre><code id="bibtex">@misc{xia2026tara,
+    <section class="section-shell content-section citation-section" id="citation">
+      <div class="citation-heading"><h2>Citation</h2><button class="button secondary" id="copy-citation">Copy BibTeX</button></div>
+      <pre><code id="bibtex">@misc{xia2026tara,
   title = {Across Viewpoints and Time: Trajectory-Generalizable Physical
            Attacks on World Models and Video Understanding Models},
   author = {Xia, Song and Ding, Meiewen and Kong, Chenqi
             and Yang, Wenhan and Jiang, Xudong},
   year = {2026},
   url = {https://xiasong0501.github.io/TARA/}
-}</code></pre><p id="copy-status" class="copy-status" aria-live="polite"></p></div></section>
+}</code></pre>
+      <p id="copy-status" class="copy-status" aria-live="polite"></p>
+    </section>
   </main>
-  <footer class="section-shell"><span><strong>TARA</strong> · Across Viewpoints and Time</span><div><a href="assets/paper/tara-paper.pdf">Paper</a><a href="mailto:Xias0002@ntu.edu.sg">Contact</a><a href="#top">Back to top ↑</a></div></footer>
+  <footer class="section-shell"><span>TARA · Song Xia et al.</span><a href="mailto:Xias0002@ntu.edu.sg">Contact</a></footer>
 </body>
 </html>
