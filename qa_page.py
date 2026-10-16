@@ -31,11 +31,17 @@ def main():
         assert order == ["top", "overview", "method", "videos", "physical", "results", "benchmark", "citation"], order
         assert page.locator("#overview .teaser").count() == 1
         assert page.locator(".teaser").count() == 1
-        assert page.locator("#overview .research-objective").inner_text().startswith("Research objective. TARA learns a single adversarial texture")
+        assert page.locator("#overview .research-objective").inner_text().startswith("Research objective. TARA learns a single printable adversarial texture for real-world physical deployment.")
         assert page.locator("#overview .motivation").evaluate("el => getComputedStyle(el).fontSize") == page.locator("#overview .research-objective").evaluate("el => getComputedStyle(el).fontSize")
         assert page.locator("#overview .motivation").evaluate("el => el.compareDocumentPosition(document.querySelector('.research-objective')) & Node.DOCUMENT_POSITION_FOLLOWING")
         assert page.locator(".headline-results .stat-value").all_inner_texts() == ["32.1%", "28.2%", "41.1%", "26.0%"]
         assert page.locator(".method-steps article").count() == 3
+        assert page.locator("#method h2").inner_text() == "Methodology: TARA"
+        assert page.locator("#method .step-number").all_inner_texts() == ["(a)", "(b)", "(c)"]
+        assert page.locator("#method .framework figcaption").count() == 0
+        assert page.locator("#method .framework").evaluate("el => el.compareDocumentPosition(document.querySelector('.method-steps')) & Node.DOCUMENT_POSITION_FOLLOWING")
+        assert page.locator("#method math").count() == 4
+        assert page.locator("#method math mfrac").count() == 2
         assert page.locator(".publication-status").count() == 0
         assert page.locator("[data-group='practical_anticipation']").get_attribute("aria-selected") == "true"
         assert page.locator(".code-link").get_attribute("href") == "https://github.com/xiasong0501/TARA"
@@ -78,6 +84,8 @@ def main():
             page.screenshot(path=str(preview / f"{name}.png"), full_page=True)
             if name == "desktop":
                 page.screenshot(path=str(preview / "first-screen.png"))
+                page.locator("#method").screenshot(path=str(preview / "method-desktop.png"))
+                assert page.locator(".method-steps article").nth(1).locator(".math-scroll").evaluate("el => el.scrollWidth <= el.clientWidth + 1"), "Desktop contrastive formula should not require horizontal scrolling"
             if name == "mobile":
                 assert page.locator(".figure-note").first.evaluate("el => parseFloat(getComputedStyle(el).fontSize)") >= 15
         assert not errors, errors

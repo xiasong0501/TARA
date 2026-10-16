@@ -77,13 +77,17 @@ sup { font-size: .7em; }
 .feature-title { font-family: Georgia, "Times New Roman", serif; font-size: 40px; font-weight: 400; line-height: 1.2; letter-spacing: -.6px; }
 .method-section, .physical-section { background: var(--section); }
 .method-section .content-section, .physical-section .content-section { border-top: 0; }
-.method-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-.method-steps article { min-width: 0; border-top: 1px solid #caccC7; padding-top: 20px; }
-.step-number { display: block; color: var(--accent); font: 34px Georgia, "Times New Roman", serif; margin-bottom: 22px; }
-.method-steps h3 { font-size: 20px; margin: 0 0 16px; min-height: 56px; }
-.method-steps p { font-size: 17px; color: var(--muted); line-height: 1.75; }
-.equation { font-family: Georgia, "Times New Roman", serif; font-size: 18px; line-height: 1.8; overflow-wrap: anywhere; padding-top: 20px; }
-.equation sub, .equation sup { font-size: .7em; }
+.method-steps { margin-top: 34px; }
+.method-steps article { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 32px; align-items: center; border-top: 1px solid #caccc7; padding-block: 28px; }
+.method-steps article:last-child { padding-bottom: 0; }
+.step-number { color: var(--accent); font-family: Georgia, "Times New Roman", serif; font-weight: 400; white-space: nowrap; margin-right: 6px; }
+.method-steps h3 { font-size: 21px; margin: 0 0 14px; line-height: 1.45; }
+.method-steps p { font-size: 17px; line-height: 1.75; }
+.equation-panel { min-width: 0; text-align: center; padding-block: 12px; }
+.math-scroll { overflow-x: auto; padding: 9px 2px; scrollbar-width: thin; }
+.math-scroll math { font-size: 20px; width: max-content; min-width: 100%; padding: 3px; }
+.math-scroll + .math-scroll { margin-top: 8px; }
+.equation-panel .math-notation { font-size: 16px; color: var(--muted); line-height: 1.6; margin-top: 13px; }
 .physical-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-bottom: 30px; }
 .physical-grid article { border-top: 1px solid #caccC7; padding-top: 18px; }
 .physical-model { font-size: 16px; color: var(--muted); }
@@ -177,8 +181,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   .nav-links { gap: 18px; }
   .section-heading { flex-direction: column; gap: 18px; }
   .section-heading > p { flex-basis: auto; }
-  .method-steps { grid-template-columns: 1fr; gap: 26px; }
-  .method-steps h3 { min-height: 0; }
+  .method-steps article { grid-template-columns: 1fr; gap: 14px; }
   .headline-results { grid-template-columns: 1fr 1fr; gap: 26px 0; }
   .headline-results > div:nth-child(3) { border-left: 0; padding-left: 0; }
   .generalization-grid { grid-template-columns: 1fr 1fr; gap: 26px; }
