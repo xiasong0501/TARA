@@ -46,8 +46,9 @@ def main():
         assert page.locator("[data-group='practical_anticipation']").get_attribute("aria-selected") == "true"
         assert page.locator(".code-link").get_attribute("href") == "https://github.com/xiasong0501/TARA"
         assert "note =" not in page.locator("#bibtex").inner_text()
-        assert "eprint = {2610.15343}" in page.locator("#bibtex").inner_text()
-        assert "Meiwen Ding" in page.locator("#bibtex").inner_text()
+        assert page.locator("#bibtex").inner_text().startswith("@article{xia2026across,")
+        assert "journal = {arXiv preprint arXiv:2610.15343}" in page.locator("#bibtex").inner_text()
+        assert "Ding, Meiwen" in page.locator("#bibtex").inner_text()
         assert page.locator(".citation-reference a").get_attribute("href") == "https://arxiv.org/abs/2610.15343v1"
         assert page.locator(".physical-comparison").count() == 0
         assert page.locator("#videos .section-heading p, #videos .figure-note, #physical .section-heading p, .qa-figure figcaption").count() == 0
