@@ -27,6 +27,12 @@ def main():
         page.on("response", lambda response: errors.append(f"HTTP {response.status}: {response.url}") if response.status >= 400 else None)
         assert page.goto(args.url, wait_until="networkidle").status == 200
         assert page.locator("h1").count() == 1
+        order = page.locator("main > section").evaluate_all("nodes => nodes.map(node => node.id)")
+        assert order == ["top", "overview", "method", "benchmark", "experiments", "conclusion", "citation"], order
+        assert page.locator("#overview .teaser").count() == 1
+        assert page.locator(".teaser").count() == 1
+        assert page.locator("#experiments #physical #videos").count() == 1
+        assert page.locator("#overview .research-objective").inner_text().startswith("TARA learns a single adversarial texture")
         assert page.locator("[data-group='practical_anticipation']").get_attribute("aria-selected") == "true"
         assert page.locator(".code-placeholder").is_disabled()
         assert "note =" not in page.locator("#bibtex").inner_text()

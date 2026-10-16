@@ -126,7 +126,7 @@ function renderGallery() {
     const meta = element("div", "video-meta");
     const link = element("a", "", "View all 32 frames"); link.href = row.montage; link.target = "_blank"; link.rel = "noopener";
     meta.append(link);
-    body.append(element("h3", "", row.label), meta);
+    body.append(element("h4", "", row.label), meta);
     card.append(video, body); return card;
   });
   grid.replaceChildren(...cards);

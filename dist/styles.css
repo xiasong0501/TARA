@@ -24,7 +24,7 @@ button, a { touch-action: manipulation; }
 button:focus-visible, a:focus-visible { outline: 3px solid #2d6baa; outline-offset: 4px; }
 button:disabled { cursor: default; }
 img { display: block; width: 100%; height: auto; }
-h1, h2, h3, p, figure { margin: 0; }
+h1, h2, h3, h4, p, figure { margin: 0; }
 h2 { font-size: 32px; font-weight: 650; line-height: 1.25; margin-bottom: 20px; }
 h3 { font-size: 23px; line-height: 1.4; font-weight: 600; margin: 36px 0 18px; }
 p + p { margin-top: 16px; }
@@ -61,9 +61,14 @@ sup { font-size: .7em; }
 .button.primary:hover { background: #46505d; }
 .code-placeholder:disabled { background: #eee; border-color: #ddd; color: #787c81; }
 .code-placeholder span { font-size: 15px; }
-.hero-summary { max-width: 900px; font-size: 20px; line-height: 1.65; margin: 28px auto 0; }
+.overview-section { padding-bottom: 48px; }
+.research-objective { max-width: 980px; font-size: 20px; line-height: 1.65; }
+.experiment-group { scroll-margin-top: 24px; }
+.experiment-group + .experiment-group { margin-top: 48px; }
+#experiments > .experiment-group:first-of-type > h3 { margin-top: 26px; }
+.subsection-title { font-size: 20px; line-height: 1.4; font-weight: 600; margin: 30px 0 18px; }
 
-/* The recorded clips are the first experiment visitors see. */
+/* Real-world recordings lead the experiments; source labels distinguish rendering. */
 .video-examples { margin-top: 26px; scroll-margin-top: 28px; }
 .gallery-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
 .gallery-tabs button { border: 0; border-bottom: 3px solid transparent; padding: 11px 7px; min-height: 52px; background: transparent; color: var(--muted); font-size: 16px; font-weight: 500; line-height: 1.4; }
@@ -74,7 +79,7 @@ sup { font-size: .7em; }
 .video-card { min-width: 0; }
 .video-card video { display: block; width: 100%; aspect-ratio: 16/10; object-fit: contain; background: #1c1c1c; border-radius: 3px; }
 .video-card-body { padding-top: 12px; }
-.video-card h3 { font-size: 18px; line-height: 1.5; font-weight: 500; margin: 0 0 5px; }
+.video-card h4 { font-size: 18px; line-height: 1.5; font-weight: 500; margin: 0 0 5px; }
 .video-meta { font-size: 15px; }
 .gallery-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 19px; font-size: 16px; color: var(--muted); }
 .gallery-controls > div { display: flex; gap: 9px; }
@@ -146,7 +151,8 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   .hero h1 span { font-size: 24px; line-height: 1.3; }
   .authors { font-size: 17px; margin-top: 22px; line-height: 1.85; }
   .affiliations { flex-direction: column; gap: 2px; font-size: 15px; }
-  .hero-summary { font-size: 18px; margin-top: 24px; }
+  .research-objective { font-size: 18px; }
+  .overview-section { padding-bottom: 36px; }
   .hero-actions { gap: 9px; }
   .button { padding-inline: 14px; }
   .code-placeholder span { font-size: 15px; }
@@ -156,7 +162,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   .gallery-tabs { grid-template-columns: 1fr 1fr; gap: 3px 9px; }
   .gallery-tabs button { text-align: left; font-size: 16px; }
   .gallery-grid { grid-template-columns: 1fr; gap: 24px; }
-  .video-card h3 { font-size: 18px; }
+  .video-card h4 { font-size: 18px; }
   .paper-figure figcaption, .figure-note { font-size: 15px; }
   .result-toolbar { gap: 10px; }
   .segmented button { padding-inline: 11px; font-size: 15px; }
