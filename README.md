@@ -6,3 +6,4 @@ Project page for **Across Viewpoints and Time: Trajectory-Generalizable Physical
 
 Song Xia, Meiewen Ding, Chenqi Kong, Wenhan Yang, and Xudong Jiang.
 
+Code and dataset will be released soon.
