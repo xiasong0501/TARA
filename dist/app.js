@@ -48,6 +48,8 @@ const GENERALIZATION = [
   ["Unseen content", "Seen trajectory", 43.2, 32.4],
   ["Unseen content", "Unseen trajectory", 28.8, 16.2]
 ];
+const GALLERY_LIMIT = 4;
+const GALLERY_PAGE_SIZE = 2;
 let resultTask = "anticipation";
 let resultSplit = "val";
 let galleryGroup = "practical_anticipation";
@@ -111,10 +113,10 @@ function renderGeneralization() {
 
 function renderGallery() {
   const gallery = window.TARA_GALLERY || [];
-  const rows = gallery.filter(row => row.group === galleryGroup);
+  const rows = gallery.filter(row => row.group === galleryGroup).slice(0, GALLERY_LIMIT);
   const grid = document.querySelector("#gallery-grid");
   grid.querySelectorAll("video").forEach(video => { video.pause(); video.removeAttribute("src"); video.replaceChildren(); video.load(); });
-  const cards = rows.slice(galleryOffset, galleryOffset + 2).map(row => {
+  const cards = rows.slice(galleryOffset, galleryOffset + GALLERY_PAGE_SIZE).map(row => {
     const card = element("article", "video-card");
     const video = element("video");
     video.controls = true; video.loop = true; video.muted = true; video.playsInline = true;
@@ -132,9 +134,9 @@ function renderGallery() {
     card.append(video, body); return card;
   });
   grid.replaceChildren(...cards);
-  document.querySelector("#gallery-range").textContent = `Examples ${galleryOffset + 1}–${Math.min(galleryOffset + 2, rows.length)} of ${rows.length}`;
+  document.querySelector("#gallery-range").textContent = `Examples ${galleryOffset + 1}–${Math.min(galleryOffset + GALLERY_PAGE_SIZE, rows.length)} of ${rows.length}`;
   document.querySelector("#gallery-prev").disabled = galleryOffset === 0;
-  document.querySelector("#gallery-next").disabled = galleryOffset + 2 >= rows.length;
+  document.querySelector("#gallery-next").disabled = galleryOffset + GALLERY_PAGE_SIZE >= rows.length;
   document.querySelector("#gallery-panel").setAttribute("aria-labelledby", `tab-${galleryGroup}`);
 }
 
@@ -162,8 +164,8 @@ tabs.forEach((button, index) => {
     tabs[next].focus(); tabs[next].click();
   });
 });
-document.querySelector("#gallery-prev").addEventListener("click", () => { galleryOffset -= 2; renderGallery(); });
-document.querySelector("#gallery-next").addEventListener("click", () => { galleryOffset += 2; renderGallery(); });
+document.querySelector("#gallery-prev").addEventListener("click", () => { galleryOffset -= GALLERY_PAGE_SIZE; renderGallery(); });
+document.querySelector("#gallery-next").addEventListener("click", () => { galleryOffset += GALLERY_PAGE_SIZE; renderGallery(); });
 document.querySelector("#copy-citation").addEventListener("click", async () => {
   const text = document.querySelector("#bibtex").textContent;
   const status = document.querySelector("#copy-status");

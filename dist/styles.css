@@ -88,17 +88,6 @@ sup { font-size: .7em; }
 .math-scroll math { font-size: 20px; width: max-content; min-width: 100%; padding: 3px; }
 .math-scroll + .math-scroll { margin-top: 8px; }
 .equation-panel .math-notation { font-size: 16px; color: var(--muted); line-height: 1.6; margin-top: 13px; }
-.physical-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-bottom: 30px; }
-.physical-grid article { border-top: 1px solid #caccC7; padding-top: 18px; }
-.physical-model { font-size: 16px; color: var(--muted); }
-.physical-grid h3 { font: 27px Georgia, "Times New Roman", serif; margin: 12px 0 20px; }
-.physical-comparison { display: flex; align-items: center; gap: 26px; }
-.physical-comparison > div { display: flex; flex-direction: column; }
-.physical-comparison strong { font: 52px Georgia, "Times New Roman", serif; margin-top: 8px; }
-.physical-comparison small { font-size: 24px; margin-left: 3px; }
-.physical-comparison span { font-size: 16px; color: var(--muted); }
-.physical-comparison .comparison-arrow { font-size: 28px; color: #92999f; }
-.physical-comparison .ours-number strong, .physical-comparison .ours-number span { color: var(--accent); }
 
 /* Real-world recordings lead the experiments; source labels distinguish rendering. */
 .video-examples { scroll-margin-top: 28px; }
@@ -115,6 +104,7 @@ sup { font-size: .7em; }
 .video-meta { font-size: 15px; }
 .gallery-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 19px; font-size: 16px; color: var(--muted); }
 .gallery-controls > div { display: flex; gap: 9px; }
+#gallery-range { font-size: 22px; font-weight: 600; color: var(--ink); }
 .icon-button { background: #fff; border: 1px solid #c6ccd2; border-radius: 4px; width: 45px; min-height: 42px; font-size: 21px; line-height: 1.4; }
 .icon-button:disabled { opacity: .3; }
 .icon-button:not(:disabled):hover { color: var(--link); border-color: var(--link); }
@@ -165,6 +155,7 @@ tbody .ours-row th { font-weight: 700; }
 /* Citation is plain selectable text, with the same copy behavior as before. */
 .citation-heading { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-bottom: 18px; }
 .citation-heading h2 { margin-bottom: 0; }
+.citation-reference { margin-bottom: 18px; }
 pre { overflow-x: auto; padding: 22px; margin: 0; background: var(--subtle); border: 1px solid var(--line); border-radius: 4px; font-size: 15px; line-height: 1.75; }
 code { font-family: Consolas, "Liberation Mono", monospace; }
 .copy-status { min-height: 25px; font-size: 16px; color: var(--link); margin-top: 8px; }
@@ -219,8 +210,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   .headline-results > div { padding-inline: 14px; }
   .stat-context { min-height: 44px; }
   .stat-value { font-size: 46px; }
-  .physical-grid { grid-template-columns: 1fr; gap: 28px; }
-  .physical-comparison strong { font-size: 48px; }
+  #gallery-range { font-size: 20px; }
   .framed-figure { padding: 12px; }
   .generalization-grid { gap: 24px 18px; }
   .generalization-title { font-size: 26px; }

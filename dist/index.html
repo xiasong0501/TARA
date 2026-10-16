@@ -38,7 +38,7 @@
   <main id="main">
     <section class="hero section-shell" id="top">
       <h1>Across Viewpoints and Time:<br><span>Trajectory-Generalizable Physical Attacks on<br class="desktop-break"> World Models and Video Understanding Models</span></h1>
-      <p class="authors">Song Xia<sup>1</sup>, Meiewen Ding<sup>1</sup>, Chenqi Kong<sup>2</sup>, Wenhan Yang<sup>3</sup>, Xudong Jiang<sup>1</sup></p>
+      <p class="authors">Song Xia<sup>1</sup>, Meiwen Ding<sup>1</sup>, Chenqi Kong<sup>2</sup>, Wenhan Yang<sup>3</sup>, Xudong Jiang<sup>1</sup></p>
       <p class="affiliations"><span><sup>1</sup> Nanyang Technological University</span><span><sup>2</sup> National University of Singapore</span><span><sup>3</sup> Pengcheng Lab</span></p>
       <div class="hero-actions">
         <a class="button primary" href="assets/paper/tara-paper.pdf" target="_blank" rel="noopener">Paper</a>
@@ -81,7 +81,7 @@
     </section>
 
     <section class="section-shell content-section video-examples" id="videos">
-      <div class="section-heading"><h2 class="feature-title">Trajectory videos</h2><p>Real-world print-and-capture recordings first, followed by simulated trajectory renderings from EK100 and SSV2.</p></div>
+      <div class="section-heading"><h2 class="feature-title">Trajectory videos</h2></div>
         <div class="gallery-tabs" role="tablist" aria-label="Video dataset">
           <button role="tab" id="tab-practical_anticipation" aria-selected="true" aria-controls="gallery-panel" data-group="practical_anticipation">Real-world anticipation</button>
           <button role="tab" id="tab-practical_recognition" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-group="practical_recognition">Real-world recognition</button>
@@ -89,18 +89,13 @@
           <button role="tab" id="tab-ssv2" aria-selected="false" aria-controls="gallery-panel" tabindex="-1" data-group="ssv2">SSV2 <span>(rendered)</span></button>
         </div>
         <div id="gallery-panel" role="tabpanel" aria-labelledby="tab-practical_anticipation"><div class="gallery-grid" id="gallery-grid"></div></div>
-        <div class="gallery-controls"><span id="gallery-range" aria-live="polite">Examples 1–2 of 10</span><div><button class="icon-button" id="gallery-prev" aria-label="Previous two video examples">←</button><button class="icon-button" id="gallery-next" aria-label="Next two video examples">→</button></div></div>
-        <p class="figure-note">Videos show 32 sampled input frames at 8 fps. Anticipation labels refer to the subsequent action.</p>
+        <div class="gallery-controls"><span id="gallery-range" aria-live="polite">Examples 1–2 of 4</span><div><button class="icon-button" id="gallery-prev" aria-label="Previous two video examples">←</button><button class="icon-button" id="gallery-next" aria-label="Next two video examples">→</button></div></div>
         <noscript><p>Enable JavaScript to browse the examples, or <a href="assets/videos/practical_anticipation-01.mp4">watch a real-world anticipation video</a>.</p></noscript>
       </section>
 
     <section class="physical-section" id="physical">
       <div class="section-shell content-section">
-        <div class="section-heading"><h2 class="feature-title">Physical evaluation</h2><p>Printed textures are attached to real objects and observed under natural motion and imaging conditions.</p></div>
-        <div class="physical-grid">
-          <article><p class="physical-model">V-JEPA2-L · printed textures</p><h3>Action anticipation</h3><div class="physical-comparison"><div><span>EOT</span><strong>28.6<small>%</small></strong></div><span class="comparison-arrow" aria-hidden="true">→</span><div class="ours-number"><span>TARA</span><strong>32.1<small>%</small></strong></div></div></article>
-          <article><p class="physical-model">V-JEPA2-L · printed textures</p><h3>Action recognition</h3><div class="physical-comparison"><div><span>EOT</span><strong>23.1<small>%</small></strong></div><span class="comparison-arrow" aria-hidden="true">→</span><div class="ours-number"><span>TARA</span><strong>28.2<small>%</small></strong></div></div></article>
-        </div>
+        <div class="section-heading"><h2 class="feature-title">Physical evaluation</h2></div>
       <div class="table-scroll"><table class="physical-table" id="physical-results"><caption class="sr-only">Top-1 attack success rate (%) on real-world captured data</caption><thead>
         <tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">Action anticipation</th><th scope="colgroup" colspan="2">Action recognition</th></tr>
         <tr><th scope="col">V-JEPA2-L</th><th scope="col">V-JEPA2.1-B</th><th scope="col">V-JEPA2-L</th><th scope="col">InternVideo2</th></tr>
@@ -148,18 +143,22 @@
         <tr><th scope="row">SSV2</th><td>Recognition</td><td>328</td><td>184 / 144</td><td>10,204</td><td>89.78%</td></tr>
         <tr><th scope="row">Real-world</th><td>Recognition / Anticipation</td><td>348</td><td>0 / 348</td><td>8,645</td><td>81.27%</td></tr>
       </tbody></table></div>
-      <figure class="paper-figure qa-figure"><a href="assets/images/human-review.webp" target="_blank" rel="noopener"><img src="assets/images/human-review.webp" width="1779" height="525" loading="lazy" alt="Surface-trajectory construction and human review of projection drift, occlusion, and supporting surfaces."></a><figcaption>Human review checks and repairs surface projection, tracking drift, and visibility estimates.</figcaption></figure>
+      <figure class="paper-figure qa-figure"><a href="assets/images/human-review.webp" target="_blank" rel="noopener"><img src="assets/images/human-review.webp" width="1779" height="525" loading="lazy" alt="Surface-trajectory construction and human review of projection drift, occlusion, and supporting surfaces."></a></figure>
     </section>
 
     <section class="section-shell content-section citation-section" id="citation">
       <div class="citation-heading"><h2>Citation</h2><button class="button secondary" id="copy-citation">Copy BibTeX</button></div>
-      <pre><code id="bibtex">@misc{xia2026tara,
+      <p class="citation-reference"><a href="https://arxiv.org/abs/2610.15343v1" target="_blank" rel="noopener">arXiv:2610.15343v1</a></p>
+      <pre><code id="bibtex">@misc{xia2026viewpointstimetrajectorygeneralizablephysical,
   title = {Across Viewpoints and Time: Trajectory-Generalizable Physical
            Attacks on World Models and Video Understanding Models},
-  author = {Xia, Song and Ding, Meiewen and Kong, Chenqi
-            and Yang, Wenhan and Jiang, Xudong},
+  author = {Song Xia and Meiwen Ding and Chenqi Kong
+            and Wenhan Yang and Xudong Jiang},
   year = {2026},
-  url = {https://xiasong0501.github.io/TARA/}
+  eprint = {2610.15343},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.CV},
+  url = {https://arxiv.org/abs/2610.15343v1}
 }</code></pre>
       <p id="copy-status" class="copy-status" aria-live="polite"></p>
     </section>

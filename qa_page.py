@@ -46,15 +46,22 @@ def main():
         assert page.locator("[data-group='practical_anticipation']").get_attribute("aria-selected") == "true"
         assert page.locator(".code-link").get_attribute("href") == "https://github.com/xiasong0501/TARA"
         assert "note =" not in page.locator("#bibtex").inner_text()
+        assert "eprint = {2610.15343}" in page.locator("#bibtex").inner_text()
+        assert "Meiwen Ding" in page.locator("#bibtex").inner_text()
+        assert page.locator(".citation-reference a").get_attribute("href") == "https://arxiv.org/abs/2610.15343v1"
+        assert page.locator(".physical-comparison").count() == 0
+        assert page.locator("#videos .section-heading p, #videos .figure-note, #physical .section-heading p, .qa-figure figcaption").count() == 0
         assert page.locator("#physical-results tbody tr:not(.protocol-row)").count() == 8
         assert page.locator("#physical-results .ours-row").last.inner_text().split() == ["Printed", "TARA", "32.1", "—", "28.2", "—"]
         for group in ("practical_anticipation", "practical_recognition", "ek100", "ssv2"):
             page.locator(f"[data-group='{group}']").click()
-            for offset in range(0, 10, 2):
+            assert page.locator("#gallery-prev").is_disabled()
+            for offset in range(0, 4, 2):
                 assert page.locator("#gallery-grid video").count() == 2
-                assert page.locator("#gallery-range").inner_text() == f"Examples {offset + 1}–{offset + 2} of 10"
-                if offset < 8:
+                assert page.locator("#gallery-range").inner_text() == f"Examples {offset + 1}–{offset + 2} of 4"
+                if offset < 2:
                     page.locator("#gallery-next").click()
+            assert page.locator("#gallery-next").is_disabled()
         for task, val, train in (("anticipation", "41.1", "48.6"), ("recognition", "26.0", "32.3")):
             page.locator(f"[data-result='{task}']").click()
             page.locator("[data-split='val']").click()
@@ -87,9 +94,10 @@ def main():
                 page.locator("#method").screenshot(path=str(preview / "method-desktop.png"))
                 assert page.locator(".method-steps article").nth(1).locator(".math-scroll").evaluate("el => el.scrollWidth <= el.clientWidth + 1"), "Desktop contrastive formula should not require horizontal scrolling"
             if name == "mobile":
+                assert page.locator("#gallery-range").evaluate("el => parseFloat(getComputedStyle(el).fontSize)") >= 20
                 assert page.locator(".figure-note").first.evaluate("el => parseFloat(getComputedStyle(el).fontSize)") >= 15
         assert not errors, errors
-        print("PASS: 40 examples, physical/results tables, video playback, citation copy, and 4 responsive layouts.")
+        print("PASS: 4 examples per scenario, physical/results tables, video playback, arXiv citation copy, and 4 responsive layouts.")
         print(f"Previews: {preview}")
         browser.close()
 

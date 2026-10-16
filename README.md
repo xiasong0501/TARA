@@ -4,6 +4,6 @@ Project page for **Across Viewpoints and Time: Trajectory-Generalizable Physical
 
 **Website:** https://xiasong0501.github.io/TARA/
 
-Song Xia, Meiewen Ding, Chenqi Kong, Wenhan Yang, and Xudong Jiang.
+Song Xia, Meiwen Ding, Chenqi Kong, Wenhan Yang, and Xudong Jiang.
 
 Code and dataset will be released soon.
